@@ -10,10 +10,12 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mudaetierlist.cpp
+    mudaetierlist.cpp \
+    tierlistdata.cpp
 
 HEADERS += \
-    mudaetierlist.h
+    mudaetierlist.h \
+    tierlistdata.h
 
 FORMS += \
     mudaetierlist.ui
