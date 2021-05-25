@@ -10,13 +10,18 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mudaetierlist.cpp
 
 HEADERS += \
-    mainwindow.h
+    mudaetierlist.h
 
 FORMS += \
-    mainwindow.ui
+    mudaetierlist.ui
+
+TRANSLATIONS += \
+    MudaeTierList_en_US.ts
+CONFIG += lrelease
+CONFIG += embed_translations
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
