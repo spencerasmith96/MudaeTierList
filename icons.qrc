@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/qresource">
+        <file alias="no-image">icons/no-image.png</file>
+    </qresource>
+</RCC>
