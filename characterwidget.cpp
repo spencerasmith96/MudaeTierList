@@ -2,6 +2,8 @@
 #include "ui_characterwidget.h"
 #include <QNetworkReply>
 #include <QUrl>
+#include <QIcon>
+#include <iostream>
 
 CharacterWidget::CharacterWidget(QString name, QString series, QString imageurl, QWidget *parent) :
     QFrame(parent),
@@ -23,11 +25,17 @@ CharacterWidget::~CharacterWidget()
 
 void CharacterWidget::imageDownloadFinished(QNetworkReply *reply)
 {
-    QByteArray bytes = reply->readAll();
     QPixmap img;
-    img.loadFromData(bytes);
-    img = img.scaled(150, 150, Qt::AspectRatioMode::KeepAspectRatio);
+    if(reply->error() == QNetworkReply::NoError){
+        QByteArray bytes = reply->readAll();
+        img.loadFromData(bytes);
+    }
+    else{
+        img.load(":/qresource/no-image");
+    }
+    img = img.scaled(ui->imageLabel->maximumSize(), Qt::AspectRatioMode::KeepAspectRatio);
     ui->imageLabel->setPixmap(img);
+
     manager->deleteLater();
     reply->deleteLater();
 }
