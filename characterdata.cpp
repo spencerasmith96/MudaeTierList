@@ -6,12 +6,11 @@ CharacterData::CharacterData(QString characterName, QSqlDatabase& db)
 {
     name = characterName;
 
-    QSqlQuery query;
+    QSqlQuery query(db);
     query.prepare("SELECT characterid FROM aliases WHERE name=(?)");
     query.addBindValue(characterName);
     query.exec();
 
-    std::cout << query.size() << std::endl;
     if(query.next()){
         rowid = query.value(0).toInt();
     }
