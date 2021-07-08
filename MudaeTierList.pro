@@ -15,17 +15,20 @@ SOURCES += \
     characterwidget.cpp \
     main.cpp \
     mudaetierlist.cpp \
-    tierlistdata.cpp
+    tierlistdata.cpp \
+    tierwidget.cpp
 
 HEADERS += \
     characterdata.h \
     characterwidget.h \
     mudaetierlist.h \
-    tierlistdata.h
+    tierlistdata.h \
+    tierwidget.h
 
 FORMS += \
     characterwidget.ui \
-    mudaetierlist.ui
+    mudaetierlist.ui \
+    tierwidget.ui
 
 TRANSLATIONS += \
     MudaeTierList_en_US.ts
