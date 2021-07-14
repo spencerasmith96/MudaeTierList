@@ -47,3 +47,8 @@ CharacterWidget *CharacterData::toWidget()
 {
     return new CharacterWidget(name, series, imageurl);
 }
+
+uint CharacterData::getid()
+{
+    return rowid;
+}

@@ -9,6 +9,7 @@ public:
     CharacterData(QString characterName, QSqlDatabase &db);
     bool isValid();
     CharacterWidget *toWidget();
+    uint getid();
 
 private:
     bool valid = true;
