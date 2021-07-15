@@ -6,6 +6,7 @@
 #include <QDrag>
 #include <QMimeData>
 #include <iostream>
+#include <QTextLine>
 
 CharacterWidget::CharacterWidget(QString name, QString series, QString imageurl, QPixmap& imagePixmap, QWidget *parent) :
     QFrame(parent),
@@ -41,7 +42,7 @@ CharacterWidget::~CharacterWidget()
 
 QString CharacterWidget::getName()
 {
-    return ui->characterName->text();
+    return ui->characterName->toolTip();
 }
 
 void CharacterWidget::imageDownloadFinished(QNetworkReply *reply)
@@ -64,13 +65,38 @@ void CharacterWidget::imageDownloadFinished(QNetworkReply *reply)
 
 void CharacterWidget::setNameLabel(QString name)
 {
-    ui->characterName->setText(name);
+    QFontMetrics fontMetrics(ui->characterName->font());
+    QString elidedName = fontMetrics.elidedText(name, Qt::ElideRight, width());
+
+    ui->characterName->setText(elidedName);
     ui->characterName->setToolTip(name);
 }
 
 void CharacterWidget::setSeriesLabel(QString series)
 {
-    ui->seriesName->setText(series);
+    QFontMetrics fontMetrics(ui->seriesName->font());
+
+    int width = ui->seriesName->width();
+    int i = 1;
+    int lastSpace = 0;
+    for(; i < series.length(); ++i){
+        if(fontMetrics.horizontalAdvance(series, i) > width){
+            lastSpace == 0 ? --i : i = lastSpace + 1;
+            break;
+        }
+        if(series[i] == ' '){
+            lastSpace = i;
+        }
+    }
+    QString elided = series.left(i);
+    int remaining = series.length() - i;
+    if(remaining > 0){
+        QString bottomText = fontMetrics.elidedText(series.right(remaining), Qt::ElideRight, ui->seriesName->width());
+        elided.append("\n" + bottomText);
+    }
+
+
+    ui->seriesName->setText(elided);
     ui->seriesName->setToolTip(series);
 }
 
@@ -81,7 +107,7 @@ void CharacterWidget::mousePressEvent(QMouseEvent *event){
         QByteArray itemData;
         QDataStream dataStream(&itemData, QIODevice::WriteOnly);
 
-        dataStream <<  ui->characterName->text() << ui->seriesName->text() << ui->imageLabel->toolTip() << ui->imageLabel->pixmap(Qt::ReturnByValueConstant());
+        dataStream <<  ui->characterName->toolTip() << ui->seriesName->toolTip() << ui->imageLabel->toolTip() << ui->imageLabel->pixmap(Qt::ReturnByValueConstant());
 
         QMimeData *mimeData = new QMimeData;
         mimeData->setData("application/character", itemData);
