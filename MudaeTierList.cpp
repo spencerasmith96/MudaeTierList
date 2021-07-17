@@ -30,6 +30,8 @@ MudaeTierList::MudaeTierList(QWidget *parent)
     connect(ui->actionSaveAs, &QAction::triggered, this, &MudaeTierList::onSaveAs);
     connect(ui->actionAddCharacters, &QAction::triggered, this, &MudaeTierList::onAddCharacters);
     connect(ui->actionOpen, &QAction::triggered, this, &MudaeTierList::onOpen);
+
+    onNewTierList();
 }
 
 MudaeTierList::~MudaeTierList()
