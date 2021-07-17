@@ -39,11 +39,12 @@ void TierWidget::dropEvent(QDropEvent *event)
         QByteArray itemData = event->mimeData()->data("application/character");
         QDataStream dataStream(&itemData, QIODevice::ReadOnly);
 
+        int rowid;
         QString name, series, url;
         QPixmap imagePixmap;
-        dataStream >> name >> series >> url >> imagePixmap;
+        dataStream >> rowid >> name >> series >> url >> imagePixmap;
 
-        CharacterWidget* droppedCharcter = new CharacterWidget(name, series, url, imagePixmap);
+        CharacterWidget* droppedCharcter = new CharacterWidget(rowid, name, series, url, imagePixmap);
 
         int characterPos = (event->position().x() - ui->characterArea->pos().x()) / droppedCharcter->size().width();
 

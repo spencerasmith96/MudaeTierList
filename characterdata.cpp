@@ -45,7 +45,7 @@ bool CharacterData::isValid()
 
 CharacterWidget *CharacterData::toWidget()
 {
-    return new CharacterWidget(name, series, imageurl);
+    return new CharacterWidget(rowid, name, series, imageurl);
 }
 
 uint CharacterData::getid()

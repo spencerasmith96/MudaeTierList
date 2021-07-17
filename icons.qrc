@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/qresource">
         <file alias="no-image">icons/no-image.png</file>
+        <file alias="trash-can">icons/trash-can.png</file>
     </qresource>
 </RCC>

@@ -14,22 +14,23 @@ SOURCES += \
     addcharactersdialog.cpp \
     characterdata.cpp \
     characterwidget.cpp \
+    deletecharacterwidget.cpp \
     main.cpp \
     mudaetierlist.cpp \
-    tierlistdata.cpp \
     tierwidget.cpp
 
 HEADERS += \
     addcharactersdialog.h \
     characterdata.h \
     characterwidget.h \
+    deletecharacterwidget.h \
     mudaetierlist.h \
-    tierlistdata.h \
     tierwidget.h
 
 FORMS += \
     addcharactersdialog.ui \
     characterwidget.ui \
+    deletecharacterwidget.ui \
     mudaetierlist.ui \
     tierwidget.ui
 

@@ -3,6 +3,7 @@
 #include "characterwidget.h"
 #include "characterdata.h"
 #include "addcharactersdialog.h"
+#include "deletecharacterwidget.h"
 #include <iostream>
 #include <QWidget>
 #include <QFileDialog>
@@ -30,6 +31,7 @@ MudaeTierList::MudaeTierList(QWidget *parent)
     connect(ui->actionSaveAs, &QAction::triggered, this, &MudaeTierList::onSaveAs);
     connect(ui->actionAddCharacters, &QAction::triggered, this, &MudaeTierList::onAddCharacters);
     connect(ui->actionOpen, &QAction::triggered, this, &MudaeTierList::onOpen);
+    connect(ui->deleteCharacterWidget, &DeleteCharacterWidget::deleteCharacter, this, &MudaeTierList::onDeleteCharacter);
 
     onNewTierList();
 }
@@ -172,6 +174,11 @@ void MudaeTierList::onOpen()
     }
 
     file.close();
+}
+
+void MudaeTierList::onDeleteCharacter(int id)
+{
+    characterIDs.erase(id);
 }
 
 void MudaeTierList::clearData()

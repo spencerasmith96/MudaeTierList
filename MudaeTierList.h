@@ -39,6 +39,7 @@ public slots:
     void onAddCharacters();
     void onAddCharactersAccepted(AddCharactersDialog *acceptedDialog);
     void onOpen();
+    void onDeleteCharacter(int id);
 
 private:
     void clearData();

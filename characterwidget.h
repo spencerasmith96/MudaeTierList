@@ -14,11 +14,12 @@ class CharacterWidget : public QFrame
     Q_OBJECT
 
 public:
-    explicit CharacterWidget(QString name, QString series, QString imageurl, QPixmap &imagePixmap, QWidget *parent = nullptr);
-    explicit CharacterWidget(QString name, QString series, QString imageurl, QWidget *parent = nullptr);
+    explicit CharacterWidget(int rowid, QString name, QString series, QString imageurl, QPixmap &imagePixmap, QWidget *parent = nullptr);
+    explicit CharacterWidget(int rowid, QString name, QString series, QString imageurl, QWidget *parent = nullptr);
     ~CharacterWidget();
 
     QString getName();
+    int getID();
     void mousePressEvent(QMouseEvent *event);
 
 signals:
@@ -30,6 +31,7 @@ public slots:
 private:
     Ui::CharacterWidget *ui;
     QNetworkAccessManager *manager;
+    int id;
     void setNameLabel(QString name);
     void setSeriesLabel(QString series);
 };

@@ -8,23 +8,25 @@
 #include <iostream>
 #include <QTextLine>
 
-CharacterWidget::CharacterWidget(QString name, QString series, QString imageurl, QPixmap& imagePixmap, QWidget *parent) :
+CharacterWidget::CharacterWidget(int rowid, QString name, QString series, QString imageurl, QPixmap& imagePixmap, QWidget *parent) :
     QFrame(parent),
     ui(new Ui::CharacterWidget)
 {
     ui->setupUi(this);
 
+    id = rowid;
     setNameLabel(name);
     setSeriesLabel(series);
     ui->imageLabel->setToolTip(imageurl);
     ui->imageLabel->setPixmap(imagePixmap);
 }
 
-CharacterWidget::CharacterWidget(QString name, QString series, QString imageurl, QWidget *parent) :
+CharacterWidget::CharacterWidget(int rowid, QString name, QString series, QString imageurl, QWidget *parent) :
     QFrame(parent),
     ui(new Ui::CharacterWidget)
 {
     hide();
+    id = rowid;
     ui->setupUi(this);
     setNameLabel(name);
     setSeriesLabel(series);
@@ -43,6 +45,11 @@ CharacterWidget::~CharacterWidget()
 QString CharacterWidget::getName()
 {
     return ui->characterName->toolTip();
+}
+
+int CharacterWidget::getID()
+{
+    return id;
 }
 
 void CharacterWidget::imageDownloadFinished(QNetworkReply *reply)
@@ -107,7 +114,7 @@ void CharacterWidget::mousePressEvent(QMouseEvent *event){
         QByteArray itemData;
         QDataStream dataStream(&itemData, QIODevice::WriteOnly);
 
-        dataStream <<  ui->characterName->toolTip() << ui->seriesName->toolTip() << ui->imageLabel->toolTip() << ui->imageLabel->pixmap(Qt::ReturnByValueConstant());
+        dataStream << id <<  ui->characterName->toolTip() << ui->seriesName->toolTip() << ui->imageLabel->toolTip() << ui->imageLabel->pixmap(Qt::ReturnByValueConstant());
 
         QMimeData *mimeData = new QMimeData;
         mimeData->setData("application/character", itemData);
